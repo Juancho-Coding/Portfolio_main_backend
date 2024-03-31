@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 
 import { validateForm } from "middleware";
 import { validationResult } from "express-validator";
+import cors from "cors";
 
 dotenv.config();
 const transporter = nodemailer.createTransport({
@@ -19,6 +20,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const app = express();
+app.use(cors());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.post("/api/v1/sendmail", validateForm, (req: Request, res: Response, next: NextFunction) => {
